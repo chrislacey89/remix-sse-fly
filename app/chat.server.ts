@@ -15,7 +15,6 @@ global.users =
     ttl: 1000 * 60 * 5,
   })
 global.chatEvents = global.chatEvents || new EventEmitter()
-console.log(global)
 export const chat = chatEvents
 
 /**

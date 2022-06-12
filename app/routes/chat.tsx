@@ -92,7 +92,7 @@ export default function Chat() {
             </List.Item>
           ))}
         </List>
-        <Form ref={formRef} method="post" replace style={{ display: 'flex' }}>
+        <Form ref={formRef} method="post" replace className='flex' >
           <Input type="text" name="message" />
           <Button type="submit" name="_action" value="send-message">
             Send

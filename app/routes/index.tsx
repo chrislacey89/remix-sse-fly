@@ -5,7 +5,7 @@ import { Form, useActionData } from '@remix-run/react'
 import { doesUserExist } from '~/chat.server'
 import { commitSession, getSession } from '~/session.server'
 import { Button, Input, Title, Card, Text } from '@mantine/core'
-import reset from '../reset.css'
+import reset from '../styles/reset.css'
 interface ActionData {
   error?: string
 }
