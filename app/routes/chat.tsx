@@ -49,6 +49,12 @@ export default function Chat() {
   const formRef = useRef<HTMLFormElement>(null)
   const { messages, users } = useEventStream('/live/chat')
 
+  function getBackgroundColor(stringInput: string) {
+    let stringUniqueHash = [...stringInput].reduce((acc, char) => {
+        return char.charCodeAt(0) + ((acc << 5) - acc);
+    }, 0);
+    return `hsl(${stringUniqueHash % 360}, 95%, 35%)`;
+}
   useEffect(() => {
     if (transition.state === 'submitting') {
       formRef.current?.reset()
@@ -84,14 +90,14 @@ export default function Chat() {
         </div>
       </section>
       <section>
-        <List listStyleType={'none'}>
+        <ul className='list-none p-0 '>
           {messages.map(({ user, message }, index) => (
-            <List.Item key={index}>
+            <li className='w-fit rounded-2xl p-3' key={index} style={{backgroundColor: getBackgroundColor(user)}}>
               <strong>{user}: </strong>
               {message}
-            </List.Item>
+            </li>
           ))}
-        </List>
+        </ul>
         <Form ref={formRef} method="post" replace className='flex' >
           <Input type="text" name="message" />
           <Button type="submit" name="_action" value="send-message">
