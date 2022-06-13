@@ -57,7 +57,7 @@ export default function Index() {
   const actionData = useActionData<ActionData>()
 
   return (
-    <main style={{ display: 'grid', placeContent: 'center', height: '100%' }}>
+    <main className='grid place-content-center h-full bg-slate-400'>
       <Card shadow="sm" p="xl">
         <Title>Remix Chat</Title>
         <Text size="sm">
