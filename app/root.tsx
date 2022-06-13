@@ -13,7 +13,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/app.css";
+import tailwindStylesheetUrl from "./styles/tailwind.css";
 import reset from "./styles/reset.css";
 
 export const links: LinksFunction = () => {

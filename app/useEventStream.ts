@@ -24,7 +24,12 @@ export function useEventStream(href: string) {
       setUsers([...users]);
     }
 
-    return () => eventSource.close();
+    return () => {
+      eventSource.removeEventListener("message", handler);
+      eventSource.removeEventListener("user-joined", handler);
+      eventSource.removeEventListener("user-left", handler);
+
+      eventSource.close()};
   }, [href]);
 
   return { messages, users };
