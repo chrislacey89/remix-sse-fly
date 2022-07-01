@@ -15,10 +15,12 @@ import {
 
 import tailwindStylesheetUrl from "./styles/app.css";
 import reset from "./styles/reset.css";
+import app from "./styles/app.css";
 
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: app },
     { rel: "stylesheet", href: reset },
   ];
 };
@@ -30,7 +32,7 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   return (
-    <html lang="en">
+    <html data-theme="dark" lang="en">
       <head>
         <Meta />
         <Links />

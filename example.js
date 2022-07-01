@@ -1,5 +1,7 @@
-function add(x, y) {
-  x + y;
+function add(x, y, callback) {
+    setTimeout(function(){
+        callback(x + y);
+    }, 1000);
 }
 
 const thunk = function () {
