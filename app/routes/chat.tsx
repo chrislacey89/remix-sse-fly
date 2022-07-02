@@ -65,47 +65,71 @@ export default function Chat() {
   }, [transition.state]);
 
   return (
-    <main style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <header style={{ marginBlock: "1rem" }}>
-        <Title style={{ marginBlock: "0" }}>Remix Chat</Title>
-        <Form method="post">
-          <button type="submit" name="_action" value="logout" className="btn">
-            Logout
-          </button>
-        </Form>
-      </header>
-      <section>
-        <div>
-          <Text>
-            Logged in as <strong>{loaderData.user}</strong>
-          </Text>
+    <main className="grid h-full place-content-center">
+      <div className="card prose">
+        <div className="card-body bg-primary p-8">
+          <header style={{ marginBlock: "1rem" }}>
+            <Form method="post">
+              <div className="card-actions">
+                <button
+                  type="submit"
+                  name="_action"
+                  value="logout"
+                  className="btn"
+                >
+                  Logout
+                </button>
+              </div>
+            </Form>
+          </header>
+          <section>
+            <div>
+              <p className="text-accent-content">
+                Logged in as{" "}
+                <strong className="text-accent-content">
+                  {loaderData.user}
+                </strong>
+              </p>
+            </div>
+            <div title={`Users: ${[...users].join(", ")}`}>
+              <p className="text-accent-content">
+                <strong className="text-accent-content">{users.length}</strong>{" "}
+                Logged in users
+              </p>
+            </div>
+          </section>
+          <section>
+            <ul className="list-none p-0 ">
+              {messages.map(({ user, message }, index) => (
+                <li
+                  className="w-fit rounded-2xl bg-secondary p-3  text-accent-content"
+                  key={index}
+                >
+                  <strong className="text-accent-content"> {user}: </strong>
+                  {message}
+                </li>
+              ))}
+            </ul>
+            <Form ref={formRef} method="post" replace className="flex">
+              <input
+                type="text"
+                name="message"
+                className="input w-full max-w-xs"
+              />
+              <div className="card-actions">
+                <button
+                  className="btn btn-accent"
+                  type="submit"
+                  name="_action"
+                  value="send-message"
+                >
+                  Send
+                </button>
+              </div>
+            </Form>
+          </section>
         </div>
-        <div title={`Users: ${[...users].join(", ")}`}>
-          <Text>
-            <strong>{users.length}</strong> Logged in users
-          </Text>
-        </div>
-      </section>
-      <section>
-        <ul className="list-none p-0 ">
-          {messages.map(({ user, message }, index) => (
-            <li
-              className="w-fit rounded-2xl p-3"
-              key={index}
-              style={{ backgroundColor: getBackgroundColor(user) }}
-            >
-              <strong>{user}: </strong>
-              {message}
-            </li>
-          ))}
-        </ul>
-        <Form ref={formRef} method="post" replace className="flex">
-          <Input type="text" name="message" />
-          <Button type="submit" name="_action" value="send-message">
-            Send
-          </Button>
-        </Form>
-      </section>
+      </div>
     </main>
   );
 }

@@ -56,10 +56,10 @@ export default function Index() {
   const actionData = useActionData<ActionData>();
 
   return (
-    <main className="grid h-full place-content-center">
-      <div className="card">
+    <main className=" grid h-full place-content-center">
+      <div className="card prose">
         <div className="card-body bg-primary p-8">
-          <h1 className="card-title">Remix Chat</h1>
+          <h3 className="card-title">Remix Chat</h3>
           <p>Enter a username to start chatting with your friends.</p>
           <Form method="post" className="flex gap-3">
             <input
