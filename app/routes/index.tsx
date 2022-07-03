@@ -5,6 +5,7 @@ import { Form, useActionData } from "@remix-run/react";
 import { doesUserExist } from "~/chat.server";
 import { commitSession, getSession } from "~/session.server";
 import reset from "../styles/reset.css";
+import DropDown from "../components/DropDown";
 interface ActionData {
   error?: string;
 }
@@ -57,6 +58,7 @@ export default function Index() {
 
   return (
     <main className=" grid h-full place-content-center">
+      <DropDown></DropDown>
       <div className="card prose">
         <div className="card-body bg-primary p-8">
           <h3 className="card-title">Remix Chat</h3>

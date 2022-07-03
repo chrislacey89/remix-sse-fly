@@ -6,8 +6,7 @@ import { useEffect, useRef } from "react";
 import { getSessionUser, getUsers, sendMessage } from "~/chat.server";
 import { destroySession, getSession } from "~/session.server";
 import { useEventStream } from "~/useEventStream";
-
-import { Button, Input, Title, Text } from "@mantine/core";
+import DropDown from "~/components/DropDown";
 
 const MAX_MESSAGE_LENGTH = 256;
 
@@ -70,7 +69,7 @@ export default function Chat() {
         <div className="card-body bg-primary p-8">
           <header style={{ marginBlock: "1rem" }}>
             <Form method="post">
-              <div className="card-actions">
+              <div className="card-actions flex">
                 <button
                   type="submit"
                   name="_action"
@@ -80,6 +79,7 @@ export default function Chat() {
                   Logout
                 </button>
               </div>
+              <DropDown />
             </Form>
           </header>
           <section>
