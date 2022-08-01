@@ -1,15 +1,15 @@
 export default function eventStream(request: Request, init: InitFunction) {
-  let stream = new ReadableStream({
+  const stream = new ReadableStream({
     start(controller) {
-      let encoder = new TextEncoder();
-      let send = (event: string, data: string) => {
+      const encoder = new TextEncoder();
+      const send = (event: string, data: string) => {
         controller.enqueue(encoder.encode(`event: ${event}\n`));
         controller.enqueue(encoder.encode(`data: ${data}\n\n`));
       };
-      let cleanup = init(send);
+      const cleanup = init(send);
 
       let closed = false;
-      let close = () => {
+      const close = () => {
         if (closed) return;
         cleanup();
         closed = true;
@@ -20,7 +20,6 @@ export default function eventStream(request: Request, init: InitFunction) {
       request.signal.addEventListener("abort", close);
       if (request.signal.aborted) {
         close();
-        return;
       }
     },
   });

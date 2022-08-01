@@ -93,10 +93,10 @@ export default function Chat() {
             </div>
           </section>
           <section>
-            <ul className="list-none p-0 ">
+            <ul className="max-h-72 list-none overflow-auto p-0	">
               {messages.map(({ user, message }, index) => (
                 <li
-                  className="w-fit rounded-2xl bg-secondary p-3  text-accent-content"
+                  className="w-fit rounded-2xl bg-secondary p-3 text-accent-content"
                   key={index}
                 >
                   <strong className="text-accent-content"> {user}: </strong>

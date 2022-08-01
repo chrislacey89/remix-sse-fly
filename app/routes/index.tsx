@@ -13,7 +13,7 @@ interface ActionData {
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   if (session.has("user")) {
-    throw redirect("/chat");
+    return redirect("/chat");
   }
   return null;
 };

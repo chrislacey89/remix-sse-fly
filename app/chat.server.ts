@@ -1,11 +1,11 @@
-import { redirect } from '@remix-run/node'
-import LRUCache from 'lru-cache'
-import { EventEmitter } from 'node:events'
-import { getSession } from './session.server'
+/* eslint-disable @typescript-eslint/no-throw-literal */
+import { EventEmitter } from "node:events";
+import { redirect } from "@remix-run/node";
+import LRUCache from "lru-cache";
+import { getSession } from "./session.server";
 
 declare global {
-  var users: LRUCache<string, undefined>
-  var chatEvents: EventEmitter
+  var users: LRUCache<string, undefined>, chatEvents: EventEmitter;
 }
 
 global.users =
@@ -13,18 +13,20 @@ global.users =
   new LRUCache({
     max: 100,
     ttl: 1000 * 60 * 5,
-  })
-global.chatEvents = global.chatEvents || new EventEmitter()
-export const chat = chatEvents
+  });
+global.chatEvents = global.chatEvents || new EventEmitter();
+export const chat = chatEvents;
 
 /**
  * Checks if a user is currently logged in, and if not, redirects to the login page.
  * If the user is logged in, returns the user's name.
  */
+type User = string | undefined;
 export async function getSessionUser(request: Request): Promise<string> {
-  const session = await getSession(request.headers.get('Cookie'))
-  if (!session.get('user')) throw redirect('/')
-  return session.get('user')
+  const session = await getSession(request.headers.get("Cookie"));
+  const user: User = session.get("user") as User;
+  if (!user) throw redirect("/");
+  return user;
 }
 
 /**
@@ -32,49 +34,49 @@ export async function getSessionUser(request: Request): Promise<string> {
  */
 
 export function addUser(user: string) {
-  users.set(user, undefined)
+  users.set(user, undefined);
   chatEvents.emit(
-    'user-joined',
+    "user-joined",
     JSON.stringify({
-      user: '👋🏻',
+      user: "👋🏻",
       message: `${user} joined the chat`,
       users: getUsers(),
     })
-  )
+  );
 }
 
 /**
  * Removes a user from the chat.
  */
 export function removeUser(user: string) {
-  users.delete(user)
+  users.delete(user);
   chatEvents.emit(
-    'user-joined',
+    "user-joined",
     JSON.stringify({
-      user: '💨',
+      user: "💨",
       message: `${user} left the chat`,
       users: getUsers(),
     })
-  )
+  );
 }
 
 /**
  * Checks if a user is currently logged in.
  */
 export function doesUserExist(user: string) {
-  return users.has(user)
+  return users.has(user);
 }
 
 /**
  * Returns a list of all users currently logged in.
  */
 export function getUsers() {
-  return Array.from(users.keys())
+  return Array.from(users.keys());
 }
 
 /**
  * Sends a message to the chat on behalf of a user
  */
 export function sendMessage(user: string, message: string) {
-  chatEvents.emit('message', { user, message, users: getUsers() })
+  chatEvents.emit("message", { user, message, users: getUsers() });
 }
