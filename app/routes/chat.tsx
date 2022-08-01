@@ -59,7 +59,7 @@ export default function Chat() {
 
   return (
     <main className="grid h-full place-content-center">
-      <div className="card prose">
+      <div className="card prose overflow-visible">
         <div className="card-body bg-primary p-8">
           <header style={{ marginBlock: "1rem" }}>
             <Form className="flex items-center justify-between" method="post">

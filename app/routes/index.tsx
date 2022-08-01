@@ -58,7 +58,7 @@ export default function Index() {
 
   return (
     <main className=" grid h-full place-content-center">
-      <div className="card prose">
+      <div className="card prose overflow-visible">
         <div className="card-body bg-primary p-8">
           <div className="flex items-end justify-between">
             <h3 className="card-title">Remix Chat</h3>
