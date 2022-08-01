@@ -51,12 +51,6 @@ export default function Chat() {
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, users } = useEventStream("/live/chat");
 
-  function getBackgroundColor(stringInput: string) {
-    const stringUniqueHash = [...stringInput].reduce((acc, char) => {
-      return char.charCodeAt(0) + ((acc << 5) - acc);
-    }, 0);
-    return `hsl(${stringUniqueHash % 360}, 95%, 70%)`;
-  }
   useEffect(() => {
     if (transition.state === "submitting") {
       formRef.current?.reset();
@@ -68,8 +62,8 @@ export default function Chat() {
       <div className="card prose">
         <div className="card-body bg-primary p-8">
           <header style={{ marginBlock: "1rem" }}>
-            <Form method="post">
-              <div className="card-actions flex">
+            <Form className="flex items-center justify-between" method="post">
+              <div className="card-actions">
                 <button
                   type="submit"
                   name="_action"

@@ -58,10 +58,13 @@ export default function Index() {
 
   return (
     <main className=" grid h-full place-content-center">
-      <DropDown></DropDown>
       <div className="card prose">
         <div className="card-body bg-primary p-8">
-          <h3 className="card-title">Remix Chat</h3>
+          <div className="flex items-end justify-between">
+            <h3 className="card-title">Remix Chat</h3>
+            <DropDown />
+          </div>
+
           <p>Enter a username to start chatting with your friends.</p>
           <Form method="post" className="flex gap-3">
             <input

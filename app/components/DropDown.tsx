@@ -44,7 +44,7 @@ export default function DropDown() {
       </label>
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+        className="dropdown-content menu rounded-box max-h-96 w-52 overflow-y-auto bg-base-100  p-2  shadow "
       >
         {themes.map((theme) => (
           <li
