@@ -23,16 +23,16 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const action: ActionFunction = async ({ request }) => {
   const user = await getSessionUser(request);
   const formData = await request.formData();
-  const action = String(formData.get("_action"));
+  const formAction = String(formData.get("_action"));
 
-  if (action === "logout") {
+  if (formAction === "logout") {
     const session = await getSession(request.headers.get("Cookie"));
     return redirect("/", {
       headers: { "Set-Cookie": await destroySession(session) },
     });
   }
 
-  if (action === "send-message") {
+  if (formAction === "send-message") {
     const message = String(formData.get("message")).slice(
       0,
       MAX_MESSAGE_LENGTH
@@ -47,6 +47,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Chat() {
   const loaderData = useLoaderData<LoaderData>();
+  // for optimistic UI on data mutations
   const transition = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, users } = useEventStream("/live/chat");

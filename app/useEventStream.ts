@@ -9,6 +9,8 @@ export function useEventStream(href: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [users, setUsers] = useState<string[]>([]);
   useEffect(() => {
+    // The web content's interface to server-sent events
+    // https://developer.mozilla.org/en-US/docs/Web/API/EventSource
     const eventSource = new EventSource(href);
 
     eventSource.addEventListener("message", handler);
@@ -17,9 +19,9 @@ export function useEventStream(href: string) {
     function handler(event: MessageEvent) {
       const { user, message, users } = JSON.parse(event.data);
 
-      setMessages((messages) => [
-        ...messages,
-        { user: user, message: message },
+      setMessages((existingMessages) => [
+        ...existingMessages,
+        { user, message },
       ]);
       setUsers([...users]);
     }
@@ -29,7 +31,8 @@ export function useEventStream(href: string) {
       eventSource.removeEventListener("user-joined", handler);
       eventSource.removeEventListener("user-left", handler);
 
-      eventSource.close()};
+      eventSource.close();
+    };
   }, [href]);
 
   return { messages, users };

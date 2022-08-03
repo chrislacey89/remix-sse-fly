@@ -11,10 +11,8 @@ import {
   removeUser,
 } from "~/chat.server";
 
-import eventStream from "~/eventStream";
-
 export const loader: LoaderFunction = async ({ request }) => {
-  if (!request.signal) return new Response(null, { status: 500 });
+  console.log("im on the server!");
   const user = await getSessionUser(request);
   // For more on ReadableStreams: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
   const stream = new ReadableStream({

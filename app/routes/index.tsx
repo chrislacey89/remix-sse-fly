@@ -4,7 +4,6 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { doesUserExist } from "~/chat.server";
 import { commitSession, getSession } from "~/session.server";
-import reset from "../styles/reset.css";
 import DropDown from "../components/DropDown";
 interface ActionData {
   error?: string;
@@ -16,15 +15,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/chat");
   }
   return null;
-};
-
-export const links = () => {
-  return [
-    {
-      rel: "stylesheet",
-      href: reset,
-    },
-  ];
 };
 
 const MAX_USERNAME_LENGTH = 20;
