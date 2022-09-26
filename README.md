@@ -28,6 +28,6 @@ The main files of interest are:
   server sent events [./app/useEventStream.ts](./app/useEventStream.ts)
 
 
-# Remix Indie Stack
-This project was bootstrapped using the Remix Indie Stack:
+### Remix Indie Stack
+This project was bootstrapped using the [Remix Indie Stack](https://github.com/remix-run/indie-stack):
 ![The Remix Indie Stack](https://repository-images.githubusercontent.com/465928257/a241fa49-bd4d-485a-a2a5-5cb8e4ee0abf)
